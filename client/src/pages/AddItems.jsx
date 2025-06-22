@@ -35,7 +35,7 @@ export default function AddItem() {
     const API = import.meta.env.VITE_API_URL;
 
     try {
-      await axios.post(`${API}/api/items", data`);
+      await axios.post(`${API}/api/items`, data);
       alert("Added");
       setForm({ name: "", type: "", description: "", coverImage: null, images: [] });
     } catch (err) {
