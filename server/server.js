@@ -29,7 +29,7 @@ const storage = new CloudinaryStorage({
 });
 const upload = multer({ storage });
 
-app.use(cors({ origin: "http://localhost:5173", methods: ["GET", "POST"] }));
+app.use(cors({ origin: "*", methods: ["GET", "POST"] }));
 app.use(express.json());
 app.use('/api', emailRoutes);
 

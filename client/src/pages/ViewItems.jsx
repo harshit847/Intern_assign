@@ -5,16 +5,18 @@ export default function ViewItems() {
     const [items, setItems] = useState([]);
     const [selected, setSelected] = useState(null);
     const [email, setEmail] = useState('');
+    const API = import.meta.env.VITE_API_URL;
+
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/viewItems')
+        axios.get(`${API}/api/viewItems`)
             .then((res) => setItems(res.data.data))
             .catch((err) => console.error(err));
     }, []);
 
     const handleEnquire = async () => {
         try {
-            await axios.post('http://localhost:5000/api/send-enquiry', {
+            await axios.post(`${API}/api/send-enquiry`, {
                 name: selected.name,
                 type: selected.type,
                 description: selected.description,
@@ -29,11 +31,13 @@ export default function ViewItems() {
     };
 
     return (
-        <div style={{ padding: '20px',paddingLeft:"90px", fontFamily: 'sans-serif' }}>
-            <h2 style={{fontSize: '3rem',
-      fontWeight: '700',
-      textShadow: '2px 2px #ff0050, -2px -2px #00f2ea',
-      letterSpacing: '1px'}}>Items</h2>
+        <div style={{ padding: '20px', paddingLeft: "90px", fontFamily: 'sans-serif' }}>
+            <h2 style={{
+                fontSize: '3rem',
+                fontWeight: '700',
+                textShadow: '2px 2px #ff0050, -2px -2px #00f2ea',
+                letterSpacing: '1px'
+            }}>Items</h2>
             <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
                 {items.map((item) => (
                     <div key={item._id}
@@ -112,7 +116,7 @@ export default function ViewItems() {
                     </button>
                     <button
                         onClick={() => setSelected(null)}
-                        style={{marginLeft: "50px", padding: '6px 12px', background: 'red', border: 'none', borderRadius: '4px' }}
+                        style={{ marginLeft: "50px", padding: '6px 12px', background: 'red', border: 'none', borderRadius: '4px' }}
                     >
                         Close
                     </button>
